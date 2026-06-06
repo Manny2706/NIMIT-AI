@@ -2,7 +2,7 @@
 
 The application uses OpenRouter with:
 
-openrouter/free
+openrouter/free- openai/gpt-oss-20b:free
 
 The model can be changed using the OPENROUTER_MODEL environment variable.
 
