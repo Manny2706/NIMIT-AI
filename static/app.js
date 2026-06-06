@@ -2,7 +2,7 @@ const transcriptEl = document.getElementById('transcript');
 const submitBtn = document.getElementById('submit');
 const statusEl = document.getElementById('status');
 const resultsEl = document.getElementById('results');
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8000';
+const BASE_URL = window.location.origin;
 function renderCards(signals) {
   resultsEl.innerHTML = '';
 
