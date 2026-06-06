@@ -1,3 +1,11 @@
+## Model Used
+
+The application uses OpenRouter with:
+
+meta-llama/llama-3.1-8b-instruct:free
+
+The model can be changed using the OPENROUTER_MODEL environment variable.
+
 # NimitAI Transcript Signals
 
 A small web app that analyzes a meeting transcript and returns AI-detected sales signals with a coaching tip for each one.
@@ -7,6 +15,27 @@ A small web app that analyzes a meeting transcript and returns AI-detected sales
 - `POST /analyse` accepts a JSON payload with `transcript`
 - The backend calls OpenRouter and asks for clean JSON only
 - The frontend lets you paste a transcript and shows results as simple cards
+
+## How it works
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend (JS)
+    participant Backend (Python)
+    participant OpenRouter (AI)
+
+    User->>Frontend (JS): Paste transcript & Click "Analyse"
+    Frontend (JS)->>Backend (Python): POST /analyse { transcript }
+    alt API Key Present
+        Backend (Python)->>OpenRouter (AI): Request Analysis (LLM)
+        OpenRouter (AI)-->>Backend (Python): JSON Signals + Tips
+    else No API Key
+        Backend (Python)->>Backend (Python): Local Heuristic Fallback
+    end
+    Backend (Python)-->>Frontend (JS): JSON Response
+    Frontend (JS)->>User: Render Signal Cards (Buying intent, Objections, etc.)
+```
 
 ## Setup
 
@@ -28,3 +57,4 @@ OpenRouter, via the OpenAI-compatible Chat Completions API.
 ## Notes
 
 If `OPENAI_API_KEY` is not set, the app falls back to a lightweight local heuristic so the UI still works for a quick demo.
+
