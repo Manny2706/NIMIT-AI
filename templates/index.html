@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NimitAI Transcript Signals</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">NimitAI</p>
+        <h1>Paste a meeting transcript and surface the moments that matter.</h1>
+        <p class="subhead">Detect buying intent, objections, confusion, and next-step signals with a coaching tip for each one.</p>
+      </section>
+
+      <section class="panel">
+        <label for="transcript">Meeting transcript</label>
+        <textarea id="transcript" placeholder="Paste the transcript here...">Rep: Pricing is $499/seat/month.
+      Prospect: That seems steep. We pay under $200 currently.
+      Rep: If your team closes one extra deal per quarter, it pays for itself 10x.
+      Prospect: Send me a pricing deck and I'll get back to you.</textarea>
+        <div class="actions">
+          <button id="submit">Analyse transcript</button>
+          <span id="status" aria-live="polite"></span>
+        </div>
+      </section>
+
+      <section>
+        <div class="results-head">
+          <h2>Signals</h2>
+          <p>Simple cards with the detected signal, the quote that triggered it, and the coaching tip.</p>
+        </div>
+        <div id="results" class="cards"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
