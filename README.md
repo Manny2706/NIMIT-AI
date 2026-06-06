@@ -2,7 +2,7 @@
 
 The application uses OpenRouter with:
 
-meta-llama/llama-3.1-8b-instruct:free
+openrouter/free
 
 The model can be changed using the OPENROUTER_MODEL environment variable.
 
@@ -31,7 +31,7 @@ sequenceDiagram
         Backend (Python)->>OpenRouter (AI): Request Analysis (LLM)
         OpenRouter (AI)-->>Backend (Python): JSON Signals + Tips
     else No API Key
-        Backend (Python)->>Backend (Python): Local Heuristic Fallback
+        Backend (Python)->>Backend (Python): Return empty signals
     end
     Backend (Python)-->>Frontend (JS): JSON Response
     Frontend (JS)->>User: Render Signal Cards (Buying intent, Objections, etc.)
@@ -45,8 +45,8 @@ sequenceDiagram
 
 ## Environment variables
 
-- `OPENROUTER_API_KEY` is used for live LLM analysis; if it is missing, the app falls back to a local heuristic demo mode
-- `OPENROUTER_MODEL` is optional and defaults to `meta-llama/llama-3.1-8b-instruct:free`
+- `OPENROUTER_API_KEY` is used for live LLM analysis; if it is missing, the app returns no signals
+- `OPENROUTER_MODEL` is optional and defaults to `openrouter/free`
 - `PORT` is optional and defaults to `8000`
 - `OPENROUTER_SITE_URL` and `OPENROUTER_APP_NAME` are optional metadata headers for OpenRouter
 
@@ -56,5 +56,5 @@ OpenRouter, via the OpenAI-compatible Chat Completions API.
 
 ## Notes
 
-If `OPENAI_API_KEY` is not set, the app falls back to a lightweight local heuristic so the UI still works for a quick demo.
+If `OPENROUTER_API_KEY` or `OPENAI_API_KEY` is not set, the app returns an empty signal list.
 

@@ -2,7 +2,6 @@ const transcriptEl = document.getElementById('transcript');
 const submitBtn = document.getElementById('submit');
 const statusEl = document.getElementById('status');
 const resultsEl = document.getElementById('results');
-const BASE_URL = window.location.origin;
 function renderCards(signals) {
   resultsEl.innerHTML = '';
 
@@ -36,7 +35,7 @@ async function analyseTranscript() {
   submitBtn.disabled = true;
 
   try {
-    const response = await fetch(`${BASE_URL}/analyse`, {
+    const response = await fetch('api/analyse', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ transcript }),
